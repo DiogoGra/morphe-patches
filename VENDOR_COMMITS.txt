@@ -1,0 +1,4 @@
+Morphe source dependencies bundled under vendor/:
+
+morphe-patcher: 6f189f9ffb448ae32ceaf6c136c9d84d9a7ed274
+morphe-patches-gradle-plugin: 0a2c1971e2913a6ea5e8fd192d359765169a6a06
