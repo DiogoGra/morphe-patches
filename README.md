@@ -1,15 +1,49 @@
-# Diogo patches
+<div align="center">
+
+# 🧩 Diogo Patches
 
 Patches for use with [Morphe](https://morphe.software/).
 
-## Supported apps
+[![Add to Morphe](https://img.shields.io/badge/Add_to_Morphe-Source-yellow)](https://morphe.software/add-source?github=DiogoGra%2Fmorphe-patches&name=Diogo%20Patches)
 
-| App | Package | Target version | Features |
-| --- | --- | --- | --- |
-| Mercado Libre | `com.mercadolibre` | `10.574.1` (`1816182806`) | Dark theme and in-app theme settings |
+[![Release](https://img.shields.io/github/v/release/DiogoGra/morphe-patches?label=Release&color=gray)](https://github.com/DiogoGra/morphe-patches/releases/latest)
+[![Downloads](https://img.shields.io/github/downloads/DiogoGra/morphe-patches/total?label=Downloads&color=gray)](https://github.com/DiogoGra/morphe-patches/releases)
+[![License](https://img.shields.io/github/license/DiogoGra/morphe-patches?color=gray)](LICENSE)
 
-## License
+Remote source: [`DiogoGra/morphe-patches`](https://github.com/DiogoGra/morphe-patches).
 
-[GPL-3.0](LICENSE). Bundled dependencies retain their license and notice files. See [NOTICE](NOTICE) and [VENDOR_COMMITS.txt](VENDOR_COMMITS.txt).
+</div>
 
-This is an independent patch bundle compatible with Morphe and is not affiliated with Mercado Libre or the Morphe project.
+## 📋 List of patches in this repository
+
+### [📦 Mercado Libre](https://play.google.com/store/apps/details?id=com.mercadolibre)
+
+<details open>
+<summary>Theme patch</summary>
+
+| 💊 Patch | 📜 Description | 🏹 Target Version |
+|:---------|:---------------|:-----------------:|
+| `Dark Theme` | Adds an option to enable a dark theme across native UI and supported public WebViews, preserving brand colors and product images. | 10.574.1 |
+
+</details>
+
+<details>
+<summary>Navigation patch · Development</summary>
+
+| 💊 Patch | 📜 Description | 🏹 Target Version |
+|:---------|:---------------|:-----------------:|
+| `Replace Videos with My purchases` | Adds an option to replace Videos with My purchases and place it in the center of the navigation bar. | 10.574.1 |
+
+</details>
+
+## 🧪 Compatibility
+
+Tested with Morphe CLI **1.7.0** on Android **API 35**. Checks cover theme switching, Home, menu, Categories, Videos, search suggestions and login text fields as a guest. Product detail pages and private account screens still require visual verification. Remote campaigns may introduce surfaces that need additional styling.
+
+The patches preserve product images, multimedia and purchase, payment and authentication behavior.
+
+## 📜 License
+
+[GPL-3.0](LICENSE). See [NOTICE](NOTICE) and [VENDOR_COMMITS.txt](VENDOR_COMMITS.txt) for bundled dependencies.
+
+An independent patch project compatible with Morphe. Not affiliated with Mercado Libre or Morphe.
