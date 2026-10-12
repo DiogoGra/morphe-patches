@@ -18,20 +18,11 @@ Remote source: [`DiogoGra/morphe-patches`](https://github.com/DiogoGra/morphe-pa
 
 ### [📦 Mercado Libre](https://play.google.com/store/apps/details?id=com.mercadolibre)
 
-<details open>
-<summary>Theme patch</summary>
-
-| 💊 Patch | 📜 Description | 🏹 Target Version |
-|:---------|:---------------|:-----------------:|
-| `Dark Theme` | Adds an option to enable a dark theme across native UI and supported public WebViews, preserving brand colors and product images. | 10.574.1 |
-
-</details>
-
 <details>
-<summary>Navigation patch · Development</summary>
 
 | 💊 Patch | 📜 Description | 🏹 Target Version |
-|:---------|:---------------|:-----------------:|
+|:--------:|:--------------:|:-----------------:|
+| `Dark Theme` | Adds an option to enable a dark theme across native UI and supported public WebViews, preserving brand colors and product images. | 10.574.1 |
 | `Replace Videos with My purchases` | Adds an option to replace Videos with My purchases and place it in the center of the navigation bar. | 10.574.1 |
 
 </details>
