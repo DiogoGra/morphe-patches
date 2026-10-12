@@ -33,6 +33,7 @@ public final class SettingsActivity extends Activity {
         header.addView(back,new LinearLayout.LayoutParams(MenuUi.dp(this,56),MenuUi.dp(this,56)));back.setOnClickListener(v->finish());
         TextView title=MenuUi.text(this,"Morphe",20,0xff333333);header.addView(title,new LinearLayout.LayoutParams(-1,-2));root.addView(header);
         ScrollView scroll=new ScrollView(this);scroll.setBackgroundColor(MenuUi.background());LinearLayout content=new LinearLayout(this);content.setOrientation(LinearLayout.VERTICAL);content.setBackgroundColor(MenuUi.surface());
+        if(ThemeRuntime.isAvailable()) {
         MenuUi.heading(content,"Apariencia");
         LinearLayout preference=new LinearLayout(this);preference.setGravity(Gravity.CENTER_VERTICAL);
         preference.setPadding(MenuUi.dp(this,20),MenuUi.dp(this,16),MenuUi.dp(this,20),MenuUi.dp(this,16));
@@ -71,12 +72,58 @@ public final class SettingsActivity extends Activity {
             }catch(ReflectiveOperationException e){throw new IllegalStateException(e);}});
         } catch(ReflectiveOperationException e){throw new IllegalStateException("ML Andes Switch API changed",e);}
         content.addView(preference);updateSummary();MenuUi.divider(content);
+        }
+        if(NavigationRuntime.isAvailable()) addNavigationPreference(content);
         MenuUi.heading(content,"Información");
-        TextView info=MenuUi.text(this,"Mercado Libre · Morphe\nTema oscuro y ajustes locales",14,MenuUi.secondary());
+        TextView info=MenuUi.text(this,"Mercado Libre · Morphe\nPersonalización y ajustes locales",14,MenuUi.secondary());
         info.setPadding(MenuUi.dp(this,20),MenuUi.dp(this,8),MenuUi.dp(this,20),MenuUi.dp(this,24));content.addView(info);
         scroll.addView(content);root.addView(scroll,new LinearLayout.LayoutParams(-1,-1));setContentView(root);
     }
     private void updateSummary(){boolean next=ThemeRuntime.requestedDark(this);summary.setText(next==ThemeRuntime.isDark()?(next?"Activado":"Desactivado"):"Se aplicará al reiniciar la app");}
+    private void addNavigationPreference(LinearLayout content) {
+        MenuUi.heading(content,"Navegación");
+        LinearLayout row=new LinearLayout(this);row.setGravity(Gravity.CENTER_VERTICAL);
+        row.setPadding(MenuUi.dp(this,20),MenuUi.dp(this,16),MenuUi.dp(this,20),MenuUi.dp(this,16));
+        LinearLayout labels=new LinearLayout(this);labels.setOrientation(LinearLayout.VERTICAL);
+        labels.addView(MenuUi.text(this,"Mis compras en el centro",16,MenuUi.primary()));
+        TextView description=MenuUi.text(this,"",14,MenuUi.secondary());
+        description.setPadding(0,MenuUi.dp(this,6),0,0);labels.addView(description);
+        Runnable refresh=()->description.setText(NavigationRuntime.requestedEnabled(this)==NavigationRuntime.isEnabled()
+            ?(NavigationRuntime.requestedEnabled(this)?"Reemplaza Videos y conserva Carrito":"Barra original de Mercado Libre")
+            :"Se aplicará al reiniciar la app");
+        row.addView(labels,new LinearLayout.LayoutParams(0,-2,1));
+        try {
+            Class<?> switches=Class.forName("com.mercadolibre.android.andesui.switchandes.AndesSwitch");
+            Class<?> status=Class.forName("com.mercadolibre.android.andesui.switchandes.status.AndesSwitchStatus");
+            Class<?> listener=Class.forName("com.mercadolibre.android.andesui.switchandes.a");
+            View toggle=(View)switches.getConstructor(Context.class,String.class,
+                Class.forName("com.mercadolibre.android.andesui.switchandes.align.AndesSwitchAlign"),
+                Class.forName("com.mercadolibre.android.andesui.switchandes.type.AndesSwitchType"),status)
+                .newInstance(this,"",switches.getField("q").get(null),switches.getField("r").get(null),
+                    status.getField(NavigationRuntime.requestedEnabled(this)?"CHECKED":"UNCHECKED").get(null));
+            toggle.setContentDescription("Mis compras en el centro");
+            Object callback=Proxy.newProxyInstance(listener.getClassLoader(),new Class<?>[]{listener},(p,m,args)->{
+                if(m.getName().equals("onStatusChange")){
+                    saveNavigation(args[0].toString().equals("CHECKED"));refresh.run();showRestart();return null;
+                }
+                if(m.getName().equals("hashCode"))return System.identityHashCode(p);
+                if(m.getName().equals("equals"))return p==args[0];
+                if(m.getName().equals("toString"))return "Morphe navigation listener";
+                return null;
+            });
+            switches.getMethod("setOnStatusChangeListener",listener).invoke(toggle,callback);
+            row.addView(toggle,new LinearLayout.LayoutParams(-2,-2));
+            row.setOnClickListener(v->{try {
+                boolean next=!NavigationRuntime.requestedEnabled(this);
+                switches.getMethod("setStatus",status).invoke(toggle,status.getField(next?"CHECKED":"UNCHECKED").get(null));
+                if(NavigationRuntime.requestedEnabled(this)!=next){saveNavigation(next);refresh.run();showRestart();}
+            }catch(ReflectiveOperationException e){throw new IllegalStateException(e);}});
+        }catch(ReflectiveOperationException e){throw new IllegalStateException("ML Andes Switch API changed",e);}
+        refresh.run();content.addView(row);MenuUi.divider(content);
+    }
+    private void saveNavigation(boolean enabled) {
+        if(!ThemeRuntime.preferences(this).edit().putBoolean("purchases_center",enabled).commit())throw new IllegalStateException("Unable to save navigation preference");
+    }
     private void showRestart(){
         LinearLayout message=new LinearLayout(this);message.setOrientation(LinearLayout.VERTICAL);
         message.setPadding(MenuUi.dp(this,24),MenuUi.dp(this,24),MenuUi.dp(this,24),MenuUi.dp(this,8));
@@ -94,6 +141,6 @@ public final class SettingsActivity extends Activity {
         if(launcher==null)throw new IllegalStateException("ML launcher missing");
         launcher.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
         // Close the current task; next Activity/context and all paint dispatchers use the saved mode.
-        finishAffinity();ThemeRuntime.applyPreference(getApplicationContext());startActivity(launcher);
+        finishAffinity();ThemeRuntime.applyPreference(getApplicationContext());NavigationRuntime.applyPreference(getApplicationContext());startActivity(launcher);
     }
 }

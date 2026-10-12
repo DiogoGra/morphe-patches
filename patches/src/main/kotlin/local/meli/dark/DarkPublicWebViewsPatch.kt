@@ -9,11 +9,7 @@ import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patcher.util.smali.ExternalLabel
 
 /** Styles the audited Categories and Home campaign pages, preserving media and page behavior. */
-val darkPublicWebViewsPatch = bytecodePatch(
-    name = "Dark Theme public WebViews",
-    description = "Scoped CSS for Categories and the Home campaign's HTML surfaces, without media filters.",
-    default = true,
-) {
+val darkPublicWebViewsPatch = bytecodePatch {
     compatibleWith(
         Compatibility(
             name = "Mercado Libre",

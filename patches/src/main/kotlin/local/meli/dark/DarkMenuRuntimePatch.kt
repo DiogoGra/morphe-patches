@@ -10,11 +10,7 @@ import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
 
 /** UI-only fixes for Flox menu sections whose server colors override the XML theme. */
-val darkMenuRuntimePatch = bytecodePatch(
-    name = "Dark Theme menu UI hooks",
-    description = "Recolors native menu section labels and separators after server styling.",
-    default = true,
-) {
+val darkMenuRuntimePatch = bytecodePatch {
     compatibleWith(
         Compatibility(
             name = "Mercado Libre",

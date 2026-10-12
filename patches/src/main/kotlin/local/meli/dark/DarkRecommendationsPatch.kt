@@ -16,11 +16,7 @@ import com.android.tools.smali.dexlib2.iface.reference.FieldReference
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 
 /** Recolors the recommendations feed's own canvas without changing shared Andes colors. */
-val darkRecommendationsPatch = bytecodePatch(
-    name = "Dark Theme recommendations feed",
-    description = "Uses a dark native background for the recommendations feed in its two render paths.",
-    default = true,
-) {
+val darkRecommendationsPatch = bytecodePatch {
     compatibleWith(
         Compatibility(
             name = "Mercado Libre",

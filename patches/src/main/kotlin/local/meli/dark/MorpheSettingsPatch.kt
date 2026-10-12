@@ -18,7 +18,7 @@ private fun signature(method: MethodReference) = method.definingClass + "->" + m
 
 /** Unnamed dependency: original paint bodies are retained for a true light-mode dispatch. */
 val morpheSettingsRuntimePatch = bytecodePatch {
-    extendWith("meli-settings.dex")
+    dependsOn(morpheMenuSettingsPatch)
     val originalPaintMethods = linkedMapOf<String, ImmutableMethod>()
     execute {
         originalPaintMethods.clear()
@@ -51,13 +51,6 @@ val morpheSettingsRuntimePatch = bytecodePatch {
         val attach = delegate.methods.single { it.name=="d" && it.parameterTypes.map(CharSequence::toString)==listOf("Landroid/content/Context;") && it.returnType=="Landroid/content/Context;" }
         if(attach.implementation!!.registerCount!=10)throw PatchException("AppCompat attachment registers changed")
         attach.addInstructions(0,"invoke-static {}, $RUNTIME->nightMode()I\nmove-result v0\niput v0, p0, Landroidx/appcompat/app/k;->T:I")
-        val bottom = mutableClassDefBy("Lcom/mercadolibre/navigation/activities/BottomBarActivity;").methods.single { it.name=="onResume" && it.parameterTypes.isEmpty() }
-        val resumed=bottom.implementation!!.instructions.indexOfFirst {
-            val ref=(it as? ReferenceInstruction)?.reference as? MethodReference
-            ref?.name=="onResume" && it.opcode in listOf(Opcode.INVOKE_SUPER,Opcode.INVOKE_SUPER_RANGE)
-        }
-        if(resumed<0)throw PatchException("BottomBar resume changed")
-        bottom.addInstructions(resumed+1,"invoke-static/range {p0 .. p0}, Llocal/meli/morphe/MenuUi;->watch(Landroid/app/Activity;)V")
     }
     finalize {
         originalPaintMethods.forEach { (key, original) ->

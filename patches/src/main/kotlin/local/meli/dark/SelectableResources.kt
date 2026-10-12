@@ -58,6 +58,9 @@ internal fun ResourcePatchContext.installSelectableResources(originals: Map<Stri
             get(path).writeBytes(original)
         }
     }
+}
+
+internal fun ResourcePatchContext.installMorpheSettingsActivity() {
     document("AndroidManifest.xml").use { doc ->
         val app=doc.getElementsByTagName("application").item(0) as Element
         val name="local.meli.morphe.SettingsActivity"

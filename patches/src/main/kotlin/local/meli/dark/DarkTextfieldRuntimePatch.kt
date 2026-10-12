@@ -17,11 +17,7 @@ import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 import com.android.tools.smali.dexlib2.Opcode
 
 /** Recolors only the paint values of Andes text fields and the login social label. */
-val darkTextfieldRuntimePatch = bytecodePatch(
-    name = "Dark Theme text field UI hooks",
-    description = "Dark text field fills, borders, labels and values without changing input behavior.",
-    default = true,
-) {
+val darkTextfieldRuntimePatch = bytecodePatch {
     compatibleWith(
         Compatibility(
             name = "Mercado Libre",

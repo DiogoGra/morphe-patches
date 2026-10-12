@@ -191,8 +191,8 @@ private val themeItems = linkedMapOf(
 
 @Suppress("unused")
 val darkThemePatch = resourcePatch(
-    name = "Dark Theme (native)",
-    description = "Dark native surfaces using Andes semantic colors; preserves brand colors, WebViews and business logic.",
+    name = "Dark Theme",
+    description = "Adds an option to enable a dark theme across native UI and supported public WebViews, preserving brand colors and media.",
     default = true,
 ) {
     compatibleWith(compatibleApp)

@@ -18,11 +18,7 @@ import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 /**
  * Only UI rendering paths. The checks deliberately fail on any unexpected app version or bytecode.
  */
-val darkHomeRuntimePatch = bytecodePatch(
-    name = "Dark Theme Home UI hooks",
-    description = "Recolors the server-selected Home canvas and action-card text after they render.",
-    default = true,
-) {
+val darkHomeRuntimePatch = bytecodePatch {
     compatibleWith(
         Compatibility(
             name = "Mercado Libre",
