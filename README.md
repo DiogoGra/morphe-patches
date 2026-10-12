@@ -9,6 +9,7 @@ Patches for use with [Morphe](https://morphe.software/).
 [![Release](https://img.shields.io/github/v/release/DiogoGra/morphe-patches?label=Release&color=gray)](https://github.com/DiogoGra/morphe-patches/releases/latest)
 [![Downloads](https://img.shields.io/github/downloads/DiogoGra/morphe-patches/total?label=Downloads&color=gray)](https://github.com/DiogoGra/morphe-patches/releases)
 [![License](https://img.shields.io/github/license/DiogoGra/morphe-patches?color=gray)](LICENSE)
+[![Telegram](https://img.shields.io/badge/Telegram-Channel-gray?logo=telegram&color=%2326A5E4)](https://t.me/DiogoPatches)
 
 Remote source: [`DiogoGra/morphe-patches`](https://github.com/DiogoGra/morphe-patches).
 
