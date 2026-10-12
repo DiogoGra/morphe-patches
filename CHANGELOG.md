@@ -1,3 +1,11 @@
+# [1.1.0](https://github.com/DiogoGra/morphe-patches/compare/v1.0.0...v1.1.0) (2026-10-12)
+
+### Features
+
+* **Mercado Libre - Navigation:** Add `Replace Videos with My purchases` for `10.574.1` ([5dfb835](https://github.com/DiogoGra/morphe-patches/commit/5dfb83592a529acf66f826d4da2799034e97b524))
+* **Mercado Libre - Navigation:** Add an in-app option to place My purchases in the center of the navigation bar ([5dfb835](https://github.com/DiogoGra/morphe-patches/commit/5dfb83592a529acf66f826d4da2799034e97b524))
+* **Mercado Libre - Theme:** Consolidate theme modules into a single `Dark Theme` patch ([5dfb835](https://github.com/DiogoGra/morphe-patches/commit/5dfb83592a529acf66f826d4da2799034e97b524))
+
 # [1.0.0](https://github.com/DiogoGra/morphe-patches/compare/640ae52f28312792b29a8c60ed90406286c9a42b...v1.0.0) (2026-10-09)
 
 ### Features
