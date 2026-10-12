@@ -27,12 +27,6 @@ Remote source: [`DiogoGra/morphe-patches`](https://github.com/DiogoGra/morphe-pa
 
 </details>
 
-## 🧪 Compatibility
-
-Tested with Morphe CLI **1.7.0** on Android **API 35**. Checks cover theme switching, Home, menu, Categories, Videos, search suggestions and login text fields as a guest. Product detail pages and private account screens still require visual verification. Remote campaigns may introduce surfaces that need additional styling.
-
-The patches preserve product images, multimedia and purchase, payment and authentication behavior.
-
 ## 📜 License
 
 [GPL-3.0](LICENSE). See [NOTICE](NOTICE) and [VENDOR_COMMITS.txt](VENDOR_COMMITS.txt) for bundled dependencies.
